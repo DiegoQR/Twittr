@@ -1,5 +1,8 @@
 const express = require("express");
 const tweetService = require("../services/tweetService");
+const validate = require("../utils/schemas/validation")
+
+const { createTweetSchema, updateTweetSchema } = require("../utils/schemas/tweetSchemas");
 
 const router = express.Router();
 
@@ -23,6 +26,10 @@ async function getTweets(req, res, next) {
 async function createTweet(req, res, next) {
     try {
         const tweet = req.body;
+        const validationError = validate(tweet, createTweetSchema);
+        if(validationError) {
+            res.status(400).json({ message: validationError.details[0].message });
+        }
         const rowsAffected = await tweetService.createTweet(tweet);
         if(rowsAffected > 0) {
             res.status(201).json({ message: "Tweet created!"})
@@ -63,6 +70,10 @@ async function updateTweet(req, res, next) {
     try {
         const { tweetId } = req.params;
         const { content } = req.body;
+        const validationError = validate(content , updateTweetSchema);
+        if(validationError) {
+            res.status(400).json({ message: validationError.details[0].message });
+        }
         const updatedRows = await tweetService.updateTweet(tweetId, content);
         if(updatedRows > 0) {
             res.status(200).json({ message: "Tweet updated!"});
