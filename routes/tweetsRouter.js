@@ -11,16 +11,16 @@ router.patch("/:tweetId", updateTweet);
 
 module.exports = router
 
-async function getTweets(req, res) {
+async function getTweets(req, res, next) {
     try {
         const tweets = await tweetService.getTweets();
         res.status(200).json(tweets)
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error);
     }
 }
 
-async function createTweet(req, res) {
+async function createTweet(req, res, next) {
     try {
         const tweet = req.body;
         const rowsAffected = await tweetService.createTweet(tweet);
@@ -30,21 +30,21 @@ async function createTweet(req, res) {
             res.status(501).json({ message: "Tweet not created!"})
         }
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error);
     }
 }
 
-async function getTweet(req, res) {
+async function getTweet(req, res, next) {
     try {
         const { tweetId } = req.params;
         const tweet = await tweetService.getTweet(tweetId);
         res.status(200).json(tweet);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        next(error)
     }    
 }
 
-async function deleteTweet(req, res) {
+async function deleteTweet(req, res, next) {
     try {
         const { tweetId } = req.params;
         const deletedRows = await tweetService.deleteTweet(tweetId);
@@ -55,11 +55,11 @@ async function deleteTweet(req, res) {
         }
         
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        next(error)
     }    
 }
 
-async function updateTweet(req, res) {
+async function updateTweet(req, res, next) {
     try {
         const { tweetId } = req.params;
         const { content } = req.body;
@@ -71,6 +71,6 @@ async function updateTweet(req, res) {
         }
         
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        next(error)
     }    
 }
