@@ -1,6 +1,6 @@
 const express = require("express");
 const tweetService = require("../services/tweetService");
-const validate = require("../utils/schemas/validation")
+const validate = require("../utils/validation")
 
 const { createTweetSchema, updateTweetSchema } = require("../utils/schemas/tweetSchemas");
 
