@@ -1,16 +1,16 @@
 const express = require("express");
 const tweetService = require("../services/tweetService");
-const validate = require("../utils/validation")
 
-const { createTweetSchema, updateTweetSchema } = require("../utils/schemas/tweetSchemas");
+const validation = require("../utils/middlewares/createValidationMiddleware");
+const { createTweetSchema, updateTweetSchema, tweetIdSchema } = require("../utils/schemas/tweetSchemas");
 
 const router = express.Router();
 
 router.get("/", getTweets);
-router.post("/", createTweet);
-router.get("/:tweetId", getTweet);
-router.delete("/:tweetId", deleteTweet);
-router.patch("/:tweetId", updateTweet);
+router.post("/", validation({ body: createTweetSchema}), createTweet);
+router.get("/:tweetId", validation({ params: tweetIdSchema}), getTweet);
+router.delete("/:tweetId", validation({ params: tweetIdSchema}), deleteTweet);
+router.patch("/:tweetId", validation({ params: tweetIdSchema}), validation({ body: updateTweetSchema}), updateTweet);
 
 module.exports = router
 
@@ -26,10 +26,12 @@ async function getTweets(req, res, next) {
 async function createTweet(req, res, next) {
     try {
         const tweet = req.body;
+        /*
         const validationError = validate(tweet, createTweetSchema);
         if(validationError) {
             res.status(400).json({ message: validationError.details[0].message });
         }
+        */
         const rowsAffected = await tweetService.createTweet(tweet);
         if(rowsAffected > 0) {
             res.status(201).json({ message: "Tweet created!"})
@@ -70,10 +72,12 @@ async function updateTweet(req, res, next) {
     try {
         const { tweetId } = req.params;
         const { content } = req.body;
+        /*
         const validationError = validate(content , updateTweetSchema);
         if(validationError) {
             res.status(400).json({ message: validationError.details[0].message });
         }
+        */
         const updatedRows = await tweetService.updateTweet(tweetId, content);
         if(updatedRows > 0) {
             res.status(200).json({ message: "Tweet updated!"});
