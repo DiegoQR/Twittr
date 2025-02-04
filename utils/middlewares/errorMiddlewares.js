@@ -1,17 +1,10 @@
 const boom = require('@hapi/boom');
-const config = require('../../config');
+const withErrorStack = require('../utils/withErrorStack');
 
 module.exports = {
 	logErrors,
 	wrapErrors,
 	errorHandler,
-}
-
-function withErrorStack(error, stack) {
-  if (config.dev) {
-    return { ...error, stack };
-  }
-  return error;
 }
 
 function logErrors(err, req, res, next) { //Middleware que solo muestra el error en la consola
