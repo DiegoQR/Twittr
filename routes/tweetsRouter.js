@@ -1,4 +1,5 @@
 const express = require("express");
+const boom = require("@hapi/boom");
 const tweetService = require("../services/tweetService");
 
 const validation = require("../utils/middlewares/createValidationMiddleware");
@@ -36,7 +37,9 @@ async function createTweet(req, res, next) {
         if(rowsAffected > 0) {
             res.status(201).json({ message: "Tweet created!"})
         } else {
-            res.status(501).json({ message: "Tweet not created!"})
+            const { output: {statusCode, payload }} = boom.notImplemented();
+            payload.message = "Tweet not found!";
+            res.status(statusCode).json(payload);
         }
     } catch (error) {
         next(error);
@@ -60,7 +63,9 @@ async function deleteTweet(req, res, next) {
         if(deletedRows > 0) {
             res.status(200).json({ message: "Tweet deleted!"});
         } else {
-            res.status(404).json({ message: "Tweet not found!"})
+            const { output: {statusCode, payload }} = boom.notFound();
+            payload.message = "Tweet not found!";
+            res.status(statusCode).json(payload);
         }
         
     } catch (error) {
@@ -82,7 +87,9 @@ async function updateTweet(req, res, next) {
         if(updatedRows > 0) {
             res.status(200).json({ message: "Tweet updated!"});
         } else {
-            res.status(404).json({ message: "Tweet not found!"})
+            const { output: {statusCode, payload }} = boom.notFound();
+            payload.message = "Tweet not found!";
+            res.status(statusCode).json(payload);
         }
         
     } catch (error) {

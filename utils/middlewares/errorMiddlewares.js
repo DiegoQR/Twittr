@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 const config = require('../../config');
 
 module.exports = {
@@ -18,6 +19,16 @@ function logErrors(err, req, res, next) { //Middleware que solo muestra el error
   next(err);
 }
 
+//Simplementa ahora cada que tenemos un error, lo convertimos a un error de boom
+function wrapErrors(err, req, res, next) { 
+  if (!err.isBoom) {
+    next(boom.badImplementation(err));
+  }
+  next(err);
+}
+
+/*
+CON BOOM YA NO NESESITAMOS ESTE WRAPEO
 function wrapErrors(err, req, res, next) { //Envuelve el error en un formato que yo nesesite
   const badImplementationError = {
     stack: err.stack,
@@ -32,6 +43,7 @@ function wrapErrors(err, req, res, next) { //Envuelve el error en un formato que
 
   next(badImplementationError);
 }
+*/
 
 function errorHandler(err, req, res, next) {
 	const { stack, output } = err;
