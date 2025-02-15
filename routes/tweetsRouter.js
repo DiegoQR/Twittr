@@ -13,7 +13,7 @@ router.get("/:tweetId", validation({ params: tweetIdSchema}), getTweet);
 router.delete("/:tweetId", validation({ params: tweetIdSchema}), deleteTweet);
 router.patch("/:tweetId", validation({ params: tweetIdSchema}), validation({ body: updateTweetSchema}), updateTweet);
 
-module.exports = router
+module.exports = (app) => app.use("/tweets", router);
 
 async function getTweets(req, res, next) {
     try {

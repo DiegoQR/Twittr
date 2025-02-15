@@ -8,7 +8,8 @@ const app = express();
 const port = config.port;
 
 app.use(express.json()); //Middleware para interpretar json
-app.use("/tweets", tweetsRouter)
+//app.use("/tweets", tweetsRouter)
+tweetsRouter(app);
 
 //Catch 404
 app.use(notFound)
