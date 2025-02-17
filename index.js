@@ -1,14 +1,19 @@
 const express = require("express");
+const helmet = require("helmet");
 const config = require("./config")
 const tweetsRouter = require("./routes/tweetsRouter")
 const { logErrors, wrapErrors, errorHandler } = require("./utils/middlewares/errorMiddlewares")
-const notFound = require("./utils/middlewares/notFoundMiddleware")
+const notFound = require("./utils/middlewares/notFoundMiddleware");
+const { default: helmet } = require("helmet");
 
 const app = express();
 const port = config.port;
 
+//Global middlewares
+app.use(helmet()); //Middleware de seguridad
 app.use(express.json()); //Middleware para interpretar json
-//app.use("/tweets", tweetsRouter)
+
+
 tweetsRouter(app);
 
 //Catch 404
