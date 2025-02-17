@@ -4,24 +4,29 @@ const tweetsRouter = require("./tweetsRouter");
 const request = testServer(tweetsRouter); //Garangizamos que solo cargamos el router para que las pruebas sean mas livianas
 
 jest.mock("../services/tweetService", () => ({
-    getTweets: jest.fn().mockResolvedValue([{ id: 1, content: "Hello, World!"} , { id: 2, content: "Hello, World!" }])	
+  getTweets: jest.fn(() => ["tweet1", "tweet2"]),
 }));
 
-describe("[ routes/tweetsRouter ]", () =>  {
-    it("should return a response with status 200", () => {
-        //Arrange
-        const expected = 200;
-        //Act
-        const result = request.get("/tweets");
-        //Assert
-        expect(result).toEqual(expected);
-    });
-    it("should return all tweets", () => {
-        //Arrange
-        const expected = [{ id: 1, content: "Hello, World!"} , { id: 2, content: "Hello, World!" }];
-        //Act
-        const result = request.get("/tweets");
-        //Assert
-        expect(result).toEqual(expected);
-    });
+describe("[ routes / tweetsRouter]", () => {
+  it("should return a response with status 200", async () => {
+    // Arrange
+    const expected = 200;
+
+    // Act
+    const { status: result } = await request.get("/tweets");
+
+    // Assert
+    expect(result).toEqual(expected);
+  });
+
+  it("should return all tweets", async () => {
+    // Arrange
+    const expected = ["tweet1", "tweet2"];
+
+    // Act
+    const { body: result } = await request.get("/tweets");
+
+    // Assert
+    expect(result).toEqual(expected);
+  });
 });
