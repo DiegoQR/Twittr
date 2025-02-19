@@ -4,7 +4,6 @@ const config = require("./config")
 const tweetsRouter = require("./routes/tweetsRouter")
 const { logErrors, wrapErrors, errorHandler } = require("./utils/middlewares/errorMiddlewares")
 const notFound = require("./utils/middlewares/notFoundMiddleware");
-const { default: helmet } = require("helmet");
 
 const app = express();
 const port = config.port;
