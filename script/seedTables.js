@@ -1,3 +1,4 @@
+const debug = require('debug')('app:db:script');
 const pool = require("../lib/connection");
 
 const createUsersTable = `CREATE TABLE users (
@@ -29,7 +30,7 @@ async function seedTable() {
         client.query(createUsersTable);
         client.query(createTweetsTable);
         client.query(insertUsers);
-        console.log("Tables created succesfully")
+        debug("Tables created succesfully")
     } catch (er) {
         console.error("Failed at create tables ", er);
     } finally {

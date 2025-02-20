@@ -1,4 +1,5 @@
 const pool = require("../lib/connection");
+const debug = require('debug')('app:db:script');
 
 const insertTweets = `INSERT INTO tweets (userId, content)
 VALUES 
@@ -18,7 +19,7 @@ async function seedTweets() {
     const client = await pool.connect();
     try {
         client.query(insertTweets);
-        console.log("Tweets inserted succesfully!");
+        debug("Tweets inserted succesfully!");
     } catch (er) {
         console.error("Error at inserting Tweets in db", er);
     } finally {

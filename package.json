@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch index.js",
-    "test": "jest --watchAll"
+    "dev:debug": "set DEBUG=express:*,app:* & npm run dev",
+    "test": "jest",
+    "test:watch": "npm run test -- --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "@hapi/boom": "^10.0.1",
     "@neondatabase/serverless": "^0.10.4",
     "cors": "^2.8.5",
+    "debug": "^4.4.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
