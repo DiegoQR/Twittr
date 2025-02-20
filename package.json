@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node --watch index.js",
     "dev:debug": "set DEBUG=express:*,app:* & npm run dev",
+    "dev:inspect": "node --inspect index.js",
     "test": "jest",
     "test:watch": "npm run test -- --watchAll"
   },
