@@ -9,3 +9,10 @@ jobs: # Trabajos que se ejecutarán
     steps: #Pasos que se ejecutarán
     - name: Hola Mundo # Nombre del paso
       run: echo "Hola Mundo" # Comando que se ejecutará
+  
+  other: # Nombre del job
+    runs-on: ubuntu-latest # Sistema operativo en el que se ejecutará el job
+
+    steps: #Pasos que se ejecutarán
+    - name: ls # Nombre del paso
+      run: ls -al # Comando que se ejecutará
