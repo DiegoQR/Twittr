@@ -1,0 +1,11 @@
+name: Hola Mundo # Nombre del flujo de trabajo
+
+on: [push] # Evento que activa el flujo de trabajo
+
+jobs: # Trabajos que se ejecutarán
+  hola: # Nombre del job
+    runs-on: ubuntu-latest # Sistema operativo en el que se ejecutará el job
+
+    steps: #Pasos que se ejecutarán
+    - name: Hola Mundo # Nombre del paso
+      run: echo "Hola Mundo" # Comando que se ejecutará
