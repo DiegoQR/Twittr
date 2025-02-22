@@ -6,9 +6,18 @@ jobs: # Trabajos que se ejecutarán
   hola: # Nombre del job
     runs-on: ubuntu-latest # Sistema operativo en el que se ejecutará el job
 
-    steps: #Pasos que se ejecutarán
-    - name: Hola Mundo # Nombre del paso
-      run: echo "Hola Mundo" # Comando que se ejecutará
+    steps: 
+    - name: Hola Mundo 
+      run: echo "Hola Mundo" 
+    
+    - name: touch file
+      run: touch hola.txt" 
+
+    - name: set text 
+      run: echo "Hola Mundo" >> hola.txt
+
+    - name: Read file
+      run: cat hola.txt 
   
   other: # Nombre del job
     runs-on: ubuntu-latest # Sistema operativo en el que se ejecutará el job
