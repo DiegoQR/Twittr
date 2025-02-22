@@ -11,7 +11,7 @@ jobs: # Trabajos que se ejecutarán
       run: echo "Hola Mundo" 
     
     - name: touch file
-      run: touch hola.txt" 
+      run: touch hola.txt 
 
     - name: set text 
       run: echo "Hola Mundo" >> hola.txt
