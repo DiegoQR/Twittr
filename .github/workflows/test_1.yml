@@ -1,6 +1,6 @@
 name: Hola Mundo # Nombre del flujo de trabajo
 
-on: [push] # Evento que activa el flujo de trabajo
+on: [push, pull_request] # Evento que activa el flujo de trabajo
 
 jobs: # Trabajos que se ejecutarán
   hola: # Nombre del job
