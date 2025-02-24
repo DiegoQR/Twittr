@@ -1,9 +1,10 @@
 name: Hola Mundo # Nombre del flujo de trabajo
 
 on:
-	push:
+  push:
     branches:
       - main # Evento que desencadenará el flujo de trabajo
+  
   pull_request:
     branches:
       - main
