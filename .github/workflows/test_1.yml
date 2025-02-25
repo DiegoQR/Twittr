@@ -12,3 +12,6 @@ jobs: # Trabajos que se ejecutarán
     steps:
       - name: var test
         run: echo "Hello ${{ vars.MY_VARIABLE_2 }}"
+      
+      - name: Secret
+        run: echo "Secret ${{ secrets.MY_SECRET }}"
