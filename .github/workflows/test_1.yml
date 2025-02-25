@@ -12,3 +12,5 @@ jobs: # Trabajos que se ejecutarán
 
       - name: ls
         uses: ./.github/actions/my-action
+        with:
+          message: "Hola Mundo!"
