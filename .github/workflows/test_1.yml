@@ -3,14 +3,21 @@ name: Test composite action
 on: [push]
 
 jobs: # Trabajos que se ejecutarán
-  local-action:
+  say-hello:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+      
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: ls
-        uses: ./.github/actions/my-action
-        with:
-          message: "Hola Mundo!"
+      - name: Test
+        run: ls -la
