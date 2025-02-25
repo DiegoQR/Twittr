@@ -6,18 +6,11 @@ jobs: # Trabajos que se ejecutarán
   say-hello:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        ports:
-          - 3306:3306
-      
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
+    env:
+      MY_NAME: "John Doe"
+    
     steps:
-      - name: Test
-        run: ls -la
+      - name: var test
+        env:
+          MY_NAME: "Jane Doe"
+        run: echo "Hello $MY_NAME"
