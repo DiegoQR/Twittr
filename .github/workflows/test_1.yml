@@ -11,6 +11,4 @@ jobs: # Trabajos que se ejecutarán
     
     steps:
       - name: var test
-        env:
-          MY_NAME: "Jane Doe"
-        run: echo "Hello $MY_NAME"
+        run: echo "Hello ${{ vars.MY_VARIABLE_2 }}"
