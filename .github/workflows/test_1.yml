@@ -3,15 +3,14 @@ name: Test composite action
 on: [push]
 
 jobs: # Trabajos que se ejecutarán
-  say-hello:
+  local-action:
     runs-on: ubuntu-latest
-
-    env:
-      MY_NAME: "John Doe"
     
     steps:
-      - name: var test
-        run: echo "Hello ${{ vars.MY_VARIABLE_2 }}"
-      
-      - name: Secret
-        run: echo "Secret ${{ secrets.MY_SECRET }}"
+      - name: ls
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -h 127.0.1.1 >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
