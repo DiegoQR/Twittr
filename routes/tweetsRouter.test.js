@@ -29,4 +29,7 @@ describe("[ routes / tweetsRouter]", () => {
     // Assert
     expect(result).toEqual(expected);
   });
+  it("should fail", async () => {
+    expect(1).toEqual(2);
+  });
 });

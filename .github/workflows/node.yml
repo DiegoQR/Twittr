@@ -30,4 +30,11 @@ jobs:
       run: npm install
 
     - name: Run tests
+      id: test
       run: npm run test
+    
+    - name: deploy
+      if: steps.test.outcome == 'success'
+      run: echo "deploying"
+
+    
